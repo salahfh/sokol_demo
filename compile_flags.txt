@@ -1,0 +1,2 @@
+-DSOKOL_GLCORE
+-Ideps
