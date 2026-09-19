@@ -2,6 +2,7 @@
 
 #define SOKOL_IMPL
 #include "sokol_app.h"
+#include "sokol_gfx.h"
 
 void init() {}
 
@@ -9,7 +10,7 @@ void frame() {}
 
 void cleanup() {}
 
-void event([[maybe_unused]] const sapp_event *ev) {
+void event(const sapp_event *ev) {
   if (ev->type == SAPP_EVENTTYPE_KEY_DOWN) {
     if (ev->key_code == SAPP_KEYCODE_ESCAPE) {
       printf("Goodbye!\n");

@@ -23,3 +23,7 @@ compile_flags.txt: FORCE
 	@echo $(LSP) | tr ' ' '\n' > $@
 
 FORCE:
+
+sokol_update:
+	wget -O deps/sokol_gfx.h https://raw.githubusercontent.com/floooh/sokol/refs/heads/master/sokol_gfx.h
+	wget -O deps/sokol_app.h https://raw.githubusercontent.com/floooh/sokol/refs/heads/master/sokol_app.h
