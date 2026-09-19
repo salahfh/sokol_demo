@@ -9,7 +9,7 @@ DEFS+=-DSOKOL_GLCORE
 LIBS+=-lX11 -lXi -lXcursor -lGL -ldl -lm
 LSP+=$(DEFS) $(INCS)
 
-all: run
+all: gui
 
 gui: src/main.c
 	$(CC) $(CFLAGS) $(INCS) $(DEFS) $(LIBS) -o gui src/main.c
@@ -27,3 +27,4 @@ FORCE:
 sokol_update:
 	wget -O deps/sokol_gfx.h https://raw.githubusercontent.com/floooh/sokol/refs/heads/master/sokol_gfx.h
 	wget -O deps/sokol_app.h https://raw.githubusercontent.com/floooh/sokol/refs/heads/master/sokol_app.h
+	wget -O deps/sokol_glue.h https://raw.githubusercontent.com/floooh/sokol/refs/heads/master/sokol_glue.h

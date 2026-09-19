@@ -3,8 +3,9 @@
 #define SOKOL_IMPL
 #include "sokol_app.h"
 #include "sokol_gfx.h"
+#include "sokol_glue.h"
 
-void init() {}
+void init() { sg_setup(&(sg_desc){.environment = sglue_environment(),}); }
 
 void frame() {}
 
