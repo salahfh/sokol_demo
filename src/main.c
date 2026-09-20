@@ -20,12 +20,10 @@ void init(void) {
       .environment = sglue_environment(),
   });
 
-  float vertices[] = {
-      // position         //  colors
-      0.0f,  0.5f,  0.5f, //  1.0f, 0.0f, 0.0f, 1.0f,
-      0.5f,  -0.5f, 0.5f, //  0.0f, 1.0f, 0.0f, 1.0f,
-      -0.5f, -0.5f, 0.5f, //  0.0f, 0.0f, 1.0f, 1.0f};
-  };
+  float vertices[] = {// position         //  colors
+                      0.0f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+                      0.5f,  -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+                      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f};
 
   state.bind.vertex_buffers[0] = sg_make_buffer(&(sg_buffer_desc){
       .data = SG_RANGE(vertices),
@@ -36,11 +34,10 @@ void init(void) {
 
   state.pip = sg_make_pipeline(&(sg_pipeline_desc){
       .shader = shd,
-      .layout =
-          {
-              .attrs = {[ATTR_shd_pos].format = SG_VERTEXFORMAT_FLOAT3},
+      .layout = {.attrs = {[ATTR_shd_pos].format = SG_VERTEXFORMAT_FLOAT3,
+                           [ATTR_shd_color0].format = SG_VERTEXFORMAT_FLOAT4}
 
-          },
+      },
       .label = "shader"});
 
   state.pass_action =
