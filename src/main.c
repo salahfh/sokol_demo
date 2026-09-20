@@ -1,15 +1,18 @@
 #include "stdio.h"
 
-#define SOKOL_IMPL
 #include "sokol_app.h"
 #include "sokol_gfx.h"
 #include "sokol_glue.h"
 
-void init() { sg_setup(&(sg_desc){.environment = sglue_environment(),}); }
+void init() {
+  sg_setup(&(sg_desc){
+      .environment = sglue_environment(),
+  });
+}
 
 void frame() {}
 
-void cleanup() {}
+void cleanup() { sg_shutdown(); }
 
 void event(const sapp_event *ev) {
   if (ev->type == SAPP_EVENTTYPE_KEY_DOWN) {

@@ -8,14 +8,24 @@ INCS+=-Ideps
 DEFS+=-DSOKOL_GLCORE
 LIBS+=-lX11 -lXi -lXcursor -lGL -ldl -lm
 LSP+=$(DEFS) $(INCS)
+OUTDIR=build
+OUTEXC=gui
 
-all: gui
+all: $(OUTEXC)
 
-gui: src/main.c
-	$(CC) $(CFLAGS) $(INCS) $(DEFS) $(LIBS) -o gui src/main.c
 
-run: gui
-	@./gui
+$(OUTDIR)/deps.o: deps/deps.c
+	@mkdir -p $(OUTDIR)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $@ deps/deps.c
+
+$(OUTEXC): $(OUTDIR)/deps.o src/main.c
+	$(CC) $(CFLAGS) $(INCS) $(LIBS) $(OUTDIR)/deps.o -o $(OUTDIR)/$(OUTEXC) src/main.c
+
+run: $(OUTEXC)
+	@./$(OUTDIR)/$(OUTEXC)
+
+clean:
+	@rm -rf $(OUTDIR)
 
 # Clangd specific
 compile_flags.txt: FORCE
