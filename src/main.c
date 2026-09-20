@@ -4,15 +4,31 @@
 #include "sokol_gfx.h"
 #include "sokol_glue.h"
 
-void init() {
+static struct {
+  sg_pipeline pip;
+  sg_bindings bind;
+  sg_pass_action pass_action;
+} state;
+
+void init(void) {
   sg_setup(&(sg_desc){
       .environment = sglue_environment(),
   });
+
+  state.pass_action =
+      (sg_pass_action){.colors[0] = {.load_action = SG_LOADACTION_CLEAR,
+                                     .clear_value = {.2f, .2f, .2f, 1.0f}}};
+};
+
+void frame() {
+  sg_begin_pass(&(sg_pass){
+      .action = state.pass_action,
+      .swapchain = sglue_swapchain(),
+  });
+
+  sg_end_pass();
+  sg_commit();
 }
-
-void frame() {}
-
-void cleanup() { sg_shutdown(); }
 
 void event(const sapp_event *ev) {
   if (ev->type == SAPP_EVENTTYPE_KEY_DOWN) {
@@ -22,6 +38,8 @@ void event(const sapp_event *ev) {
     }
   }
 };
+
+void cleanup() { sg_shutdown(); }
 
 sapp_desc sokol_main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]) {
   printf("Hello world \n");
