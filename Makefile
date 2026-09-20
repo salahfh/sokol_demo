@@ -12,7 +12,6 @@ OUTDIR=build
 OUTEXC=gui
 
 SHDC=sokol-shdc
-# SHDCFLAGS=--format sokol_impl --slang glsl410
 SHDCFLAGS=--format sokol_impl --slang glsl430:hlsl5:metal_macos
 SHADERS= \
 	 shaders/shd.glsl.h
